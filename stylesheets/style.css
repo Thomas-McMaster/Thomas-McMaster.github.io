@@ -128,3 +128,8 @@
 .card-body-contact {
     background-color:#f2f5fa;
 }
+
+/* ADDED: Style to make the navbar title slightly smaller */
+.navbar-brand {
+    font-size: 1.0rem !important;
+}
