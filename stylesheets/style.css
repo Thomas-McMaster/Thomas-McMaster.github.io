@@ -133,3 +133,11 @@
 .navbar-brand {
     font-size: 1.0rem !important;
 }
+
+/* Style for the CEFR badge in the navigation bar */
+.cefr-badge {
+    height: 35px; /* Size appropriate for the navbar */
+    width: auto;
+    margin-left: 10px;
+    vertical-align: middle;
+}
