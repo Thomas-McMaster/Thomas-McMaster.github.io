@@ -5,114 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Thomas McMaster - Data Engineer & SQL Developer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .navbar-dark.bg-primary {
-            background-color: rgb(0, 0, 81) !important;
-        }
-        .text-primary {
-            color: rgb(0, 0, 81) !important;
-        }
-        .nav-link:hover {
-            text-decoration: underline;
-        }
-        .profile-img {
-            border-radius: 50%;
-            border: 2px solid rgb(0, 0, 81);
-            width: 170px;
-            height: 170px;
-            object-fit: cover;
-            float: left;
-            margin-right: 20px;
-        }
-        .skills-img {     
-            width: 50px;
-            height: 50px;       
-            float: left;  
-            position: absolute;
-            left: 15px;          
-        }
-        .servicesText.card {
-            height: 280px;
-            cursor: pointer;
-        }
-        .servicesIcon {
-            font-size: 36px;
-            text-align: center;
-            width: 100%;
-        }
-        .servicesText:hover {
-            border: 1px solid #000080;
-        }
-        .card-title {
-            text-align: center;
-        }
-        .card:hover .servicesIcon {
-            color: #008000;
-        }    
-        .table {
-            border-collapse: collapse;
-        }
-        .table td {
-            border: none; /* Remove borders from table cells */
-        }
-        .table h5 {
-            margin: 0; /* Remove default margin from h5 */
-        }
-
-        .job-container {
-            display: flex;
-            align-items: center;
-            border: 1px solid #ccc;
-            padding: 10px;
-            max-width: 100%;
-        }
-
-        .logo {
-            width: 50px; /* Adjust size as needed */
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .logo img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .details {
-            margin-left: 15px;
-        }
-
-        .role {
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .description {
-            font-size: 12px;
-            color: #555;
-        }
-
-.card-title {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.experience-title {
-    text-align: left;
-}
-
- .experience-img {     
-            width: 75px;
-            height: 75px; 
-            display: flex;                              
-            float: left;
-            left: 15px;
-            padding:10px;          
-        }
-
-    </style>
+    <link href="stylesheets/style.css" rel="stylesheet"> 
 </head>
 <body>
 
@@ -151,7 +44,7 @@
     <p>Most recently, I've been working in Azure on projects using Synapse Analytics, pySpark, and YAML-based pipelines. I'm Microsoft certified in Azure Fundamentals and I enjoy keeping up to date with data concepts and developments. I'm a keen road cyclist and speak A2 level Norwegian in line with the CEFR European language framework. I'm currently working towards B1 level certification, and plan to continue learning Norwegian as a working language.</p>
     <table class="table">
         <tr>
-            <td style="vertical-align: top;">
+            <td class="td-align-top">
                 <h5>Career experience:</h5>
                 <ul>
                     <li>Regularly working with data in efficient and performant ways</li>
@@ -161,7 +54,7 @@
                     <li>Automation that's strongly improved existing business processes</li>
                 </ul>
             </td>
-            <td style="vertical-align: top;">
+            <td class="td-align-top">
                 <h5>Main technical skills:</h5>
                 <ul>
                     <li>SQL Server and T-SQL</li>
@@ -187,7 +80,7 @@
                 <div class="card-body">
                     <i class='fas servicesIcon fa-shield-alt'></i>
                     <img src="images/Azure.jpg" alt="Azure" class="skills-img"><h4 class="card-title mt-3">Cloud Technologies</h4>
-                    <p align="center" class="card-text mt-3"><strong>Using Azure to harness Cloud computing</strong></p>
+                    <p class="p-align-center card-text mt-3"><strong>Using Azure to harness Cloud computing</strong></p>
                     <p>I have experience with Synapse Analytics using Apache Spark, pySpark, Spark SQL, and ADLS Gen 2 storage.</p>
                     <p>Also working with 3rd party APIs, medallion architectures, KeyVault, and Azure-based security.</p>
                 </div>
@@ -199,7 +92,7 @@
                 <div class="card-body">
                     <i class="fas servicesIcon fa-clock"></i>
                     <img src="images/SQLServer.png" alt="SQLServer" class="skills-img"><h4 class="card-title mt-3">SQL</h4>
-                    <p align="center" class="card-text mt-3"><strong>Creating performant, well-structured SQL objects</strong></p>
+                    <p class="p-align-center card-text mt-3"><strong>Creating performant, well-structured SQL objects</strong></p>
                     <p>Significant experience working with SQL Server's database engine and T-SQL.</p>
                     <p>Experience in objects including tempdb, indexes, views, stored procedures, security principles, and query tuning.</p>
                 </div>
@@ -211,7 +104,7 @@
                 <div class="card-body">
                     <i class='fas servicesIcon fa-wrench'></i>
                     <img src="images/DevOps.png" alt="DevOps" class="skills-img"><h4 class="card-title mt-3">CI / CD</h4>
-                    <p align="center" class="card-text mt-3"><strong>Using Yaml to create and provision resources</strong></p>
+                    <p class="p-align-center card-text mt-3"><strong>Using Yaml to create and provision resources</strong></p>
                     <p>I have delivered work with YAML-based continuous integration and deployment pipelines.</p><p>This has released changes to multiple environments, from development to production.</p>
                 </div>
             </div>  
@@ -222,7 +115,7 @@
                 <div class="card-body">
                     <i class='fas servicesIcon fa-search'></i>
                     <img src="images/Git.png" alt="Git" class="skills-img"><h4 class="card-title mt-3">Source Control</h4>
-                    <p align="center" class="card-text mt-3"><strong>Maintaining code with Git and Azure Dev Ops</strong></p>
+                    <p class="p-align-center card-text mt-3"><strong>Maintaining code with Git and Azure Dev Ops</strong></p>
                     <p>I enjoy using popular tools such as Git and Azure Dev Ops to collaborate with colleagues.<p>This includes constructive peer-reviews of code and new features.</p>
                 </div>
             </div>  
@@ -233,7 +126,7 @@
                 <div class="card-body">
                     <i class='fas servicesIcon fa-layer-group'></i>
                     <img src="images/ETL.png" alt="ETL" class="skills-img"><h4 class="card-title mt-3">ETL / ELT</h4>
-                    <p align="center" class="card-text mt-3"><strong>Migrating and transforming data</strong></p>
+                    <p class="p-align-center card-text mt-3"><strong>Migrating and transforming data</strong></p>
                     <p>I have been part of collaborative teams where we have delivered data migrations at different scales.</p> 
                     <p>These involved FTSE 100 companies, through to internal nightly data transfer processes for reporting and compliance.</p>                        
                 </div>
@@ -245,7 +138,7 @@
                 <div class="card-body">
                     <i class='far servicesIcon fa-check-circle'></i>
                     <img src="images/Powershell.png" alt="Powershell" class="skills-img"><h4 class="card-title mt-3">Powershell</h4>
-                    <p align="center" class="card-text mt-3"><strong>Introducing useful automation with scripting</strong></p>
+                    <p class="p-align-center card-text mt-3"><strong>Introducing useful automation with scripting</strong></p>
                     <p>I use Microsoft Powershell to automate manual tasks.</p><p>This has often been for data transfer or to automate Windows operations to improve business processes.</p>
                 </div>
             </div>  
@@ -258,7 +151,7 @@
                 <div class="card-body">
                     <i class='fas servicesIcon fa-search'></i>
                     <img src="images/PowerBI.png" alt="PowerBI" class="skills-img"><h4 class="card-title mt-3">Data Analysis</h4>
-                    <p align="center" class="card-text mt-3"><strong>Creating reports and dashboards for insight</strong></p>
+                    <p class="p-align-center card-text mt-3"><strong>Creating reports and dashboards for insight</strong></p>
                     <p>Power BI, SSRS, and Excel help me to produce meaningful data analysis, visualisations, and reports.</p>
                     <p>This includes presenting data with trends and points that are immediately useful.</p>
                 </div>
@@ -270,7 +163,7 @@
                 <div class="card-body">
                     <i class='fas servicesIcon fa-shield-alt'></i>
                     <img src="images/DataModel.jpg" alt="DataModel" class="skills-img"><h4 class="card-title mt-3">Data Modelling</h4>
-                    <p align="center" class="card-text mt-3"><strong>Restructuring data for review</strong></p>
+                    <p class="p-align-center card-text mt-3"><strong>Restructuring data for review</strong></p>
                     <p>I have experience transforming data into the Kimball analytical model for deeper review and analysis.</p>
                     <p>This includes data across type 1 and type 2 models.</p>
                 </div>
@@ -282,7 +175,7 @@
                 <div class="card-body">
                     <i class='fas servicesIcon fa-wrench'></i>
                     <img src="images/Document.png" alt="Document" class="skills-img"><h4 class="card-title mt-3">Technical Writing</h4>
-                    <p align="center" class="card-text mt-3"><strong>Providing well-written documentation</strong></p>
+                    <p class="p-align-center card-text mt-3"><strong>Providing well-written documentation</strong></p>
                     <p>I take pride in writing documentation that presents concepts in an easy-to-understand way.</p> 
                     <p>I aim to deliver key points quickly, but with comprehensive technical detail, in formats including Word and Markdown.</p>
                 </div>
@@ -392,7 +285,7 @@
             <div class="row">                
                 <div class="col-lg-12 mt-12">
                     <div class="card portfolioContent">                       
-                        <div class="card-body" style=background-color:#f2f5fa>
+                        <div class="card-body card-body-contact">
 							<center>
                             <h4 class="card-title">LinkedIn</h4>
                             <p class="card-text">View my LinkedIn profile and use it to get in touch.</p>
