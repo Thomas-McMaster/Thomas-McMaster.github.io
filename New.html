@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomas McMaster - Data Engineer & SQL Developer</title>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-base: #0B0F17;
+            --bg-card: rgba(18, 26, 41, 0.75);
+            --bg-card-hover: rgba(28, 38, 59, 0.85);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(0, 210, 255, 0.3);
+            --accent-cyan: #00d2ff;
+            --accent-blue: #3a7bd5;
+            --accent-purple: #7928CA;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 210, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 65%, rgba(121, 40, 202, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(11, 15, 23, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .navbar-brand {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 150px;
+            padding-bottom: 80px;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid var(--border-accent);
+            color: var(--accent-cyan);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #a5f3fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .hero-description strong {
+            color: var(--text-main);
+        }
+
+        .inline-flag {
+            width: 20px;
+            vertical-align: middle;
+            margin-left: 4px;
+            border-radius: 2px;
+        }
+
+        /* Profile Sidebar / Terminal Card */
+        .profile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+        }
+
+        /* Terminal Mockup in Hero */
+        .terminal-box {
+            background: #06090e;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .terminal-btn {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .tb-red { background: #ff5f56; }
+        .tb-yellow { background: #ffbd2e; }
+        .tb-green { background: #27c93f; }
+
+        .terminal-code {
+            color: #a5f3fc;
+        }
+
+        /* Section Layouts */
+        .section {
+            padding: 80px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        /* Summary / Career Split Block */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .summary-card h5 {
+            font-size: 1.1rem;
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-card ul {
+            list-style: none;
+        }
+
+        .summary-card li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .summary-card li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .skill-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .skill-icon-img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-card h4 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .skill-subtitle {
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .skill-body p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        /* Experience Timeline */
+        .experience-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .exp-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        .exp-card:hover {
+            border-color: var(--border-accent);
+        }
+
+        .exp-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .exp-title-area {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .exp-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .exp-role {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .exp-company {
+            font-size: 0.95rem;
+            color: var(--accent-cyan);
+        }
+
+        .tech-stack-tag {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+
+        .exp-bullets {
+            list-style: none;
+        }
+
+        .exp-bullets li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .exp-bullets li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .sub-section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Contact Section */
+        .contact-card {
+            background: linear-gradient(135deg, rgba(18, 26, 41, 0.8) 0%, rgba(28, 38, 59, 0.8) 100%);
+            border: 1px solid var(--border-accent);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(90deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
+            color: #000;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Can be enhanced with mobile toggle */
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="#" class="navbar-brand">
+                <span class="brand-dot"></span>
+                Thomas McMaster
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Hero / About Section -->
+        <section id="about" class="hero">
+            <div class="hero-main">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-database"></i> Data Engineer & SQL Developer
+                </div>
+                <h1 class="hero-title">Delivering efficient, well-structured data solutions.</h1>
+                
+                <div class="hero-description">
+                    <p>Hello. I'm Thomas, a <strong>Data Engineer and SQL Developer</strong> currently working with <strong>Azure Synapse Analytics, pySpark and database modelling / development</strong>. My focus is on delivering efficient, well-structured data solutions across public, private, and charitable sectors.</p>
+                    <p><strong>Working as a part of great teams</strong>, I have industry experience in <strong>Git, Azure Dev Ops, SQL Server, Azure resources (ADLS Gen2, Key vault, etc), and CI/CD</strong>, alongside <strong>T-SQL and data modeling (Kimball)</strong>. I'm also <strong>Microsoft certified</strong> (Azure Fundamentals and Azure Data Fundamentals).</p>
+                    <p>I believe that the best data solutions are driven by <strong>collaboration, clarity, and quantifiable results</strong>. Outside of work, I'm a keen road cyclist. I speak <strong>A2 CEFR level Norwegian</strong> <img src="images/norwegian_flag.svg" alt="Norwegian Flag" class="inline-flag"> and am currently working towards B1 level, which I hope to use as a working language.</p>
+                </div>
+
+                <!-- Career & Skills Summary -->
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h5><i class="fa-solid fa-briefcase"></i> Career experience</h5>
+                        <ul>
+                            <li>Regularly working with data in efficient and performant ways</li>
+                            <li>Data analysis that has assisted decision makers in important choices</li>
+                            <li>Database administration based around security and reliable data restoration</li>
+                            <li>Data migration experience at a variety of scales</li>
+                            <li>Automation that's strongly improved existing business processes</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h5><i class="fa-solid fa-code"></i> Main technical skills</h5>
+                        <ul>
+                            <li>SQL Server and T-SQL</li>
+                            <li>Synapse Analytics, pySpark, and sparkSQL</li>
+                            <li>CI CD through DevOps YAML-based pipelines</li>
+                            <li>Powershell for automation of business tasks</li>
+                            <li>Azure resources including Key Vault, RBAC, and DevOps</li>
+                            <li>SQL Server Integration and Reporting Services</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Sidebar / Terminal View -->
+            <aside class="profile-sidebar">
+                <div class="profile-card">
+                    <div class="profile-img-container">
+                        <img src="images/Profile.jpg" alt="Thomas McMaster" class="profile-img">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 4px;">Thomas McMaster</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Data & Database Specialist</p>
+                    
+                    <a href="#contact" class="btn-primary" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 8px 16px;">
+                        Get In Touch
+                    </a>
+
+                    <!-- Terminal Widget -->
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-btn tb-red"></span>
+                            <span class="terminal-btn tb-yellow"></span>
+                            <span class="terminal-btn tb-green"></span>
+                        </div>
+                        <div>$ az synapse pipeline run</div>
+                        <div class="terminal-code">> Ingestion complete</div>
+                        <div class="terminal-code">> Kimball model updated</div>
+                        <div><span style="color: var(--accent-cyan);">✓</span> Status: Success</div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-layer-group" style="color: var(--accent-cyan);"></i> Skills & Capabilities</h2>
+            </div>
+
+            <div class="skills-grid">
+                <!-- Skill 1 -->
+                <div class="skill-card">
+                    <div class="skill-top">
+                        <div class="skill-header">
+                            <img src="images/Azure.jpg" alt="Azure" class="skill-icon-img">
+                            <h4>Cloud Technologies</h4>
+                        </div>
+                        <div class="skill-subtitle">Using Azure to harness Cloud computing</div>
+                        <div class="skill-body">
+                            <p>I have experience with Synapse Analytics using Apache Spark, pySpark, Spark SQL, ADLS Gen 2 storage, 3rd party API calls, KeyVault, and Azure-based security.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="skill-card">
+                    <div class="skill-top">
+                        <div class="skill-header">
+                            <img src="images/SQLServer.png" alt="SQLServer" class="skill-icon-img">
+                            <h4>SQL</h4>
+                        </div>
+                        <div class="skill-subtitle">Creating performant, well-structured SQL objects</div>
+                        <div class="skill-body">
+                            <p>Significant experience working with SQL Server's database engine and T-SQL.</p>
+                            <p>Experience in objects including tempdb, indexes, views, stored procedures, security principles, and query tuning.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="skill-card">
+                    <div class="skill-top">
+                        <div class="skill-header">
+                            <img src="images/DevOps.png" alt="DevOps" class="skill-icon-img">
+                            <h4>CI / CD</h4>
+                        </div>
+                        <div class="skill-subtitle">Using CI/CD pipelines to provision resources</div>
+                        <div class="skill-body">
+                            <p>I'm familiar with YAML-based continuous integration and deployment pipelines, and promoting changes to multiple environments as part of structured releases (development -> UAT -> production).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 4 -->
+                <div class="skill-card">
+                    <div class="skill-top">
+                        <div class="skill-header">
+                            <img src="images/Git.png" alt="Git" class="skill-icon-img">
+                            <h4>Source Control</h4>
+                        </div>
+                        <div class="skill-subtitle">Maintaining code with Git and Azure Dev Ops</div>
+                        <div class="skill-body">
+                            <p>I enjoy using popular tools such as Git and Azure Dev Ops to collaborate with colleagues.</p>
+                            <p>This includes constructive peer-reviews of code and new features.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 5 -->
+                <div class="skill-card">
+                    <div class="skill-top">
+                        <div class="skill-header">
+                            <img src="images/ETL.png" alt="ETL" class="skill-icon-img">
+                            <h4>ETL / ELT</h4>
+                        </div>
+                        <div class="skill-subtitle">Migrating and transforming data</div>
+                        <div class="skill-body">
+                            <p>I have been part of collaborative teams where we have delivered data migrations at different scales.</p> 
+                            <p>These involved FTSE 100 companies, through to internal nightly data transfer processes for reporting and compliance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 6 -->
+                <div class="skill-card">
+                    <div class="skill-top">
+                        <div class="skill-header">
+                            <img src="images/Powershell.png" alt="Powershell" class="skill-icon-img">
+                            <h4>Powershell</h4>
+                        </div>
+                        <div class="skill-subtitle">Introducing useful automation with scripting</div>
+                        <div class="skill-body">
+                            <p>I use Microsoft Powershell to automate manual tasks.</p>
+                            <p>This has often been for data transfer or to automate Windows operations to improve business processes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 7 -->
+                <div class="skill-card">
+                    <div class="skill-top">
+                        <div class="skill-header">
+                            <img src="images/PowerBI.png" alt="PowerBI" class="skill-icon-img">
+                            <h4>Data Analysis</h4>
+                        </div>
+                        <div class="skill-subtitle">Creating reports and dashboards for insight</div>
+                        <div class="skill-body">
+                            <p>Power BI, SSRS, and Excel help me to produce meaningful data analysis, visualisations, and reports.</p>
+                            <p>This includes presenting data with trends and points that are immediately useful.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 8 -->
+                <div class="skill-card">
+                    <div class="skill-top">
+                        <div class="skill-header">
+                            <img src="images/DataModel.jpg" alt="DataModel" class="skill-icon-img">
+                            <h4>Data Modelling</h4>
+                        </div>
+                        <div class="skill-subtitle">Restructuring data for review</div>
+                        <div class="skill-body">
+                            <p>I have experience transforming data into the Kimball analytical model for deeper review and analysis and surfacing data using medallion architectures.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 9 -->
+                <div class="skill-card">
+                    <div class="skill-top">
+                        <div class="skill-header">
+                            <img src="images/Document.png" alt="Document" class="skill-icon-img">
+                            <h4>Technical Writing</h4>
+                        </div>
+                        <div class="skill-subtitle">Providing well-written documentation</div>
+                        <div class="skill-body">
+                            <p>I take pride in writing documentation that presents concepts in an easy-to-understand way.</p> 
+                            <p>I aim to deliver key points quickly, but with comprehensive technical detail, in formats including Word and Markdown.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-timeline" style="color: var(--accent-cyan);"></i> Experience</h2>
+            </div>
+
+            <div class="experience-timeline">
+                <!-- Recent Experience Item 1 -->
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div class="exp-title-area">
+                            <img src="images/ACCA_Logo.png" alt="ACCA" class="exp-logo">
+                            <div>
+                                <div class="exp-role">Data Engineer</div>
+                                <div class="exp-company">ACCA (Association of Chartered and Certified Accountants)</div>
+                            </div>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan);">
+                            2024 — Present
+                        </div>
+                    </div>
+                    <div class="tech-stack-tag">
+                        <strong>Technologies:</strong> Azure Dev Ops, Synapse analytics, pySpark, Spark SQL, SQL Server, YAML, Kimball, data modelling, Jira, Confluence
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Collaborated within a 4-person engineering team to introduce the Synapse Analytics platform to the business, serving data analysts, scientists, and reporting users</li>
+                        <li>Automated data ingestion, cleansing, and curation using pipelines, pySpark notebooks, calls to external data sources, and serverless SQL views</li>                                
+                        <li>Introduced daily, weekly, and monthly ingestion cycles for three key business areas, eliminating the need for manual CSV extracts to generate reporting</li>
+                        <li>Modeled raw data into Kimball dimension / fact tables, transitioning it from an operational to analytical state</li>
+                        <li>Developed a business data model with over 100 documented entities to deliver accessible reporting</li>
+                        <li>Implemented a new medallion data lake structure (raw, cleansed, curated), to lay the foundation of a well-governed reporting platform</li>
+                        <li>Introduced Power BI dashboards for operational monitoring, providing visibility into data pipeline performance and failure rates</li>
+                        <li>Worked closely with consultants, third-party software suppliers, and external experts on large-scale projects</li>
+                    </ul>
+                </div>
+
+                <!-- Recent Experience Item 2 -->
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div class="exp-title-area">
+                            <img src="images/HymansRobertson_Logo.jpg" alt="Hymans Robertson" class="exp-logo">
+                            <div>
+                                <div class="exp-role">Data Engineer</div>
+                                <div class="exp-company">Hymans Robertson</div>
+                            </div>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan);">
+                            2022 — 2024
+                        </div>
+                    </div>
+                    <div class="tech-stack-tag">
+                        <strong>Technologies:</strong> SQL Server 2008 R2 to 2019, PowerShell, SSIS, SSRS, Azure Dev Ops, Data Factory, Synapse Analytics, YAML, BICEP, Kimball, data modelling.
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Analysis and delivery of changes to pension scheme data via complex T-SQL scripting and stored procedures.</li>
+                        <li>Automated the transfer and anonymization of data between databases with PowerShell and YAML pipelines.</li>
+                        <li>Developed bespoke risk transfer reporting for in-house actuaries and external insurance firms.</li>
+                        <li>Data analysis to inform decision-makers involved in the UK government's Pensions Dashboard initiative.</li>
+                        <li>Introduced a reporting data warehouse moving on-premises data to Delta Lake with Synapse Analytics.</li>
+                        <li>Provisioned Cloud resources via CI and CD YAML-based pipelines and Bicep.</li>
+                        <li>Delivery of solutions and collaboration with colleagues via Git and Azure Dev Ops (ADO).</li>
+                    </ul>
+                </div>
+
+                <!-- Recent Experience Item 3 -->
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div class="exp-title-area">
+                            <img src="images/EastRenfrewshireCouncil_Logo.png" alt="East Renfrewshire Council" class="exp-logo">
+                            <div>
+                                <div class="exp-role">Senior ICT Officer</div>
+                                <div class="exp-company">East Renfrewshire Council</div>
+                            </div>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan);">
+                            2020 — 2022
+                        </div>
+                    </div>
+                    <div class="tech-stack-tag">
+                        <strong>Technologies:</strong> SQL Server 2008 R2 to 2019, Oracle 12 to 19c, PowerShell, SSIS, SSRS, Git, RMAN.
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>DBA with responsibility for the Authority's SQL Server and Oracle database estate.</li>
+                        <li>Automation of data transfers with scripted WinSCP.</li>
+                        <li>Delivery of new reporting suite to monitor health of the Council's database estate.</li>
+                        <li>Working with suppliers and third parties to ensure smooth data migrations to Cloud hosts.</li>
+                        <li>Introduction of nightly Oracle 'hot' backup solution to increase service availability.</li>
+                        <li>Creation of SQL Server corruption checker. Nightly check of 450 SQL databases for new DR strategy.</li>
+                        <li>Maintenance of Civica Icon and Servitor, NEC's Revenue's and Benefits, NEC Ohms, and Tribal's K2.</li>
+                        <li>Ongoing review of database security, roles, and the release of encryption-at-rest for SQL Server.</li>
+                    </ul>
+                </div>
+
+                <!-- Recent Experience Item 4 -->
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div class="exp-title-area">
+                            <img src="images/Maggies_Logo.png" alt="Maggie's" class="exp-logo">
+                            <div>
+                                <div class="exp-role">Database Developer and BI Analyst</div>
+                                <div class="exp-company">Maggie's</div>
+                            </div>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan);">
+                            2019 — 2020
+                        </div>
+                    </div>
+                    <div class="tech-stack-tag">
+                        <strong>Technologies:</strong> SQL Server (2008 R2 to 2017), thankQ CRM, SSIS, SSRS, VBA, Microsoft Office.
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Automation of data pipelines (fundraising financials, stewardship communications, and event promotion).</li>
+                        <li>Creation of bespoke data extracts for fundraisers and campaign organisers.</li>
+                        <li>Monitoring and resolving database performance issues, backup strategy and scheduled maintenance.</li>
+                        <li>Requirements analysis with support staff, colleagues at 26 NHS hospitals, and senior stakeholders.</li>
+                        <li>Processing of requests sent to the Database Service Team's inbox.</li>
+                    </ul>
+                </div>
+
+                <!-- Sub Header: Previous Experience -->
+                <div class="sub-section-title">
+                    <i class="fa-solid fa-history" style="color: var(--accent-cyan);"></i> Previous Experience
+                </div>
+
+                <!-- Previous Experience Item 1 -->
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div class="exp-title-area">
+                            <img src="images/HymansRobertson_Logo.jpg" alt="Hymans Robertson" class="exp-logo">
+                            <div>
+                                <div class="exp-role">Systems Analyst / Programmer</div>
+                                <div class="exp-company">Hymans Robertson</div>
+                            </div>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan);">
+                            2011 — 2019
+                        </div>
+                    </div>
+                    <div class="tech-stack-tag">
+                        <strong>Technologies:</strong> SQL Server, T-SQL, SSIS, Microsoft Access with Visual Basic for Applications, SSRS, Civica UPM2 and W2.
+                    </div>
+                </div>
+
+                <!-- Previous Experience Item 2 -->
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div class="exp-title-area">
+                            <img src="images/HP_Logo.png" alt="Hewlett Packard" class="exp-logo">
+                            <div>
+                                <div class="exp-role">Contract Database Developer</div>
+                                <div class="exp-company">Hewlett Packard</div>
+                            </div>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan);">
+                            2010 — 2011
+                        </div>
+                    </div>
+                    <div class="tech-stack-tag">
+                        <strong>Technologies:</strong> SQL Server, SSRS, VBA, Microsoft Office
+                    </div>
+                </div>
+
+                <!-- Previous Experience Item 3 -->
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div class="exp-title-area">
+                            <img src="images/EastAyrshireCouncil_Logo.jfif" alt="East Ayrshire Council" class="exp-logo">
+                            <div>
+                                <div class="exp-role">Asset and Systems Support Officer</div>
+                                <div class="exp-company">East Ayrshire Council</div>
+                            </div>
+                        </div>
+                        <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan);">
+                            2007 — 2010
+                        </div>
+                    </div>
+                    <div class="tech-stack-tag">
+                        <strong>Technologies:</strong> SQL Server, Microsoft Office with Visual Basic for Applications, Classic ASP, Street and Address Gazetteer Management to BS7666 standard.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="contact-card">
+                <h4>Let's Connect</h4>
+                <p>View my LinkedIn profile to get in touch or learn more about my experience.</p>
+                <a href="http://www.linkedin.com/in/thomasmcmastersql" class="btn-primary" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn Profile
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; Thomas McMaster Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
