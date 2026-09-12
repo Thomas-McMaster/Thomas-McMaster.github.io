@@ -156,13 +156,6 @@
             color: var(--text-main);
         }
 
-        .inline-flag {
-            width: 20px;
-            vertical-align: middle;
-            margin-left: 4px;
-            border-radius: 2px;
-        }
-
         /* Profile Sidebar / Terminal Card */
         .profile-card {
             background: var(--bg-card);
@@ -189,39 +182,6 @@
             border-radius: 50%;
             border: 2px solid var(--accent-cyan);
             box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
-        }
-
-        /* Terminal Mockup in Hero */
-        .terminal-box {
-            background: #06090e;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-align: left;
-            margin-top: 20px;
-        }
-
-        .terminal-header {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 10px;
-        }
-
-        .terminal-btn {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .tb-red { background: #ff5f56; }
-        .tb-yellow { background: #ffbd2e; }
-        .tb-green { background: #27c93f; }
-
-        .terminal-code {
-            color: #a5f3fc;
         }
 
         /* Section Layouts */
@@ -293,7 +253,7 @@
             color: var(--accent-cyan);
         }
 
-        /* Skills Grid */
+        /* Consolidated Skills Grid Styles */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -308,7 +268,6 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
 
         .skill-card:hover {
@@ -320,36 +279,41 @@
         .skill-header {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             margin-bottom: 16px;
         }
 
-        .skill-icon-img {
-            width: 42px;
-            height: 42px;
-            object-fit: contain;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 6px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
+        .skill-header i {
+            font-size: 1.4rem;
+            color: var(--accent-cyan);
         }
 
         .skill-card h4 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-main);
-        }
-
-        .skill-subtitle {
-            font-size: 0.85rem;
-            color: var(--accent-cyan);
-            font-weight: 600;
-            margin-bottom: 12px;
         }
 
         .skill-body p {
             font-size: 0.9rem;
             color: var(--text-muted);
-            margin-bottom: 8px;
+            margin-bottom: 16px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .tag {
+            background: rgba(0, 210, 255, 0.08);
+            border: 1px solid var(--border-accent);
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 6px;
         }
 
         /* Experience Timeline */
@@ -430,6 +394,10 @@
             color: var(--text-muted);
         }
 
+        .exp-bullets li strong {
+            color: var(--text-main);
+        }
+
         .exp-bullets li::before {
             content: "•";
             position: absolute;
@@ -462,11 +430,6 @@
         .contact-card h4 {
             font-size: 1.5rem;
             margin-bottom: 10px;
-        }
-
-        .contact-card p {
-            color: var(--text-muted);
-            margin-bottom: 24px;
         }
 
         .btn-primary {
@@ -508,7 +471,7 @@
 
         @media (max-width: 768px) {
             .nav-links {
-                display: none; /* Can be enhanced with mobile toggle */
+                display: none;
             }
             .hero-title {
                 font-size: 2rem;
@@ -558,7 +521,7 @@
                         <h5><i class="fa-solid fa-briefcase"></i> Career experience</h5>
                         <ul>
                             <li>Processing and surfacing data in efficient and performant ways</li>
-			    <li>Communicating with non-technical business stakeholders about their data and simplifying complex technical concepts</li>
+                            <li>Communicating with non-technical business stakeholders about their data and simplifying complex technical concepts</li>
                             <li>Data analysis that has assisted decision makers in important choices</li>
                             <li>Database administration based around security and reliable data restoration</li>
                             <li>Data migration experience at a variety of scales</li>
@@ -572,7 +535,7 @@
                             <li>Azure resources including Key Vault, storage mediums (ADLS Gen2), access control (ACLs and RBAC), and DevOps</li>
                             <li>SQL Server and T-SQL</li>
                             <li>CI CD through DevOps YAML-based pipelines</li>
-			    <li>GitHub (pull requests, branching, and constructive peer review)</li>
+                            <li>GitHub (pull requests, branching, and constructive peer review)</li>
                             <li>Powershell for automation of business tasks</li>
                             <li>SQL Server Integration and Reporting Services</li>
                         </ul>
@@ -592,7 +555,6 @@
                     <a href="#contact" class="btn-primary" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 8px 16px;">
                         Get In Touch
                     </a>
-                    
                 </div>
             </aside>
         </section>
@@ -600,137 +562,112 @@
         <!-- Skills Section -->
         <section id="skills" class="section">
             <div class="section-header">
-                <h2 class="section-title"><i class="fa-solid fa-layer-group" style="color: var(--accent-cyan);"></i> Skills</h2>
+                <h2 class="section-title"><i class="fa-solid fa-layer-group" style="color: var(--accent-cyan);"></i> Technical Skills</h2>
             </div>
 
             <div class="skills-grid">
-                <!-- Skill 1 -->
+                <!-- Skill Domain 1 -->
                 <div class="skill-card">
-                    <div class="skill-top">
-                        <div class="skill-header">
-                            <img src="images/Azure.jpg" alt="Azure" class="skill-icon-img">
-                            <h4>Cloud Technologies</h4>
-                        </div>
-                        <div class="skill-subtitle">Using Azure to harness Cloud computing</div>
-                        <div class="skill-body">
-                            <p>I work daily with Synapse Analytics using Apache Spark, pySpark, Spark SQL, ADLS Gen 2 storage, 3rd party API calls, KeyVault, and Azure-based security.</p>
-                        </div>
+                    <div class="skill-header">
+                        <i class="fa-solid fa-cloud"></i>
+                        <h4>Cloud & Data Lakes</h4>
+                    </div>
+                    <div class="skill-body">
+                        <p>I work daily with Synapse Analytics using Apache Spark, pySpark, Spark SQL, ADLS Gen 2 storage, 3rd party API calls, Key Vault, and Azure-based security.</p>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">Synapse Analytics</span>
+                        <span class="tag">PySpark</span>
+                        <span class="tag">Spark SQL</span>
+                        <span class="tag">ADLS Gen2</span>
+                        <span class="tag">Key Vault</span>
+                        <span class="tag">REST APIs</span>
                     </div>
                 </div>
 
-                <!-- Skill 2 -->
+                <!-- Skill Domain 2 -->
                 <div class="skill-card">
-                    <div class="skill-top">
-                        <div class="skill-header">
-                            <img src="images/SQLServer.png" alt="SQLServer" class="skill-icon-img">
-                            <h4>SQL</h4>
-                        </div>
-                        <div class="skill-subtitle">Creating performant, well-structured SQL objects</div>
-                        <div class="skill-body">
-                            <p>Significant experience working with SQL Server's database engine and T-SQL.</p>
-                            <p>Experience in objects including tempdb, indexes, views, stored procedures, and security principles.</p>
-                        </div>
+                    <div class="skill-header">
+                        <i class="fa-solid fa-database"></i>
+                        <h4>Databases & Data Modelling</h4>
+                    </div>
+                    <div class="skill-body">
+                        <p>Experience designing performant relational schemas, complex T-SQL queries, and modern semantic models to drive business reporting.</p>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">SQL Server</span>
+                        <span class="tag">T-SQL</span>
+                        <span class="tag">Kimball Methodology</span>
+                        <span class="tag">Medallion Architecture</span>
+                        <span class="tag">Oracle PL/SQL</span>
                     </div>
                 </div>
 
-                <!-- Skill 3 -->
+                <!-- Skill Domain 3 -->
                 <div class="skill-card">
-                    <div class="skill-top">
-                        <div class="skill-header">
-                            <img src="images/DevOps.png" alt="DevOps" class="skill-icon-img">
-                            <h4>CI / CD</h4>
-                        </div>
-                        <div class="skill-subtitle">Using CI/CD pipelines to provision resources</div>
-                        <div class="skill-body">
-                            <p>I'm familiar with YAML-based continuous integration and deployment pipelines, and promoting changes through environments (development -> UAT -> production).</p>
-                        </div>
+                    <div class="skill-header">
+                        <i class="fa-solid fa-code-branch"></i>
+                        <h4>DevOps & Continuous Integration</h4>
+                    </div>
+                    <div class="skill-body">
+                        <p>Automating code and feature release using modern source control, peer reviews, and CI/CD pipelines.</p>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">Azure DevOps</span>
+                        <span class="tag">YAML Pipelines</span>
+                        <span class="tag">Git & GitHub</span>
+                        <span class="tag">CI/CD</span>
                     </div>
                 </div>
 
-                <!-- Skill 4 -->
+                <!-- Skill Domain 4 -->
                 <div class="skill-card">
-                    <div class="skill-top">
-                        <div class="skill-header">
-                            <img src="images/Git.png" alt="Git" class="skill-icon-img">
-                            <h4>Source Control</h4>
-                        </div>
-                        <div class="skill-subtitle">Maintaining code with Git and Azure Dev Ops</div>
-                        <div class="skill-body">
-                            <p>I enjoy using tools such as Git and Azure Dev Ops to collaborate with colleagues and provide constructive peer review and feedback.</p>
-                        </div>
+                    <div class="skill-header">
+                        <i class="fa-solid fa-gears"></i>
+                        <h4>ETL, ELT & Automation</h4>
+                    </div>
+                    <div class="skill-body">
+                        <p>Building automated pipelines and cross-platform data migrations.</p>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">Data Pipelines</span>
+                        <span class="tag">Synapse Analytics</span>
+                        <span class="tag">PowerShell</span>
+                        <span class="tag">SSIS</span>
                     </div>
                 </div>
 
-                <!-- Skill 5 -->
+                <!-- Skill Domain 5 -->
                 <div class="skill-card">
-                    <div class="skill-top">
-                        <div class="skill-header">
-                            <img src="images/ETL.png" alt="ETL" class="skill-icon-img">
-                            <h4>ETL / ELT</h4>
-                        </div>
-                        <div class="skill-subtitle">Migrating and transforming data</div>
-                        <div class="skill-body">
-                            <p>I have been part of collaborative teams where we have delivered data migrations at different scales, from FTSE 100 companies through to internal nightly data transfer processes for reporting and compliance.</p>
-                        </div>
+                    <div class="skill-header">
+                        <i class="fa-solid fa-chart-column"></i>
+                        <h4>Analytics & Reporting</h4>
+                    </div>
+                    <div class="skill-body">
+                        <p>Transforming complex raw datasets into visual dashboards and reports with clear insights for decision-makers.</p>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">Power BI</span>
+                        <span class="tag">SSRS</span>
+                        <span class="tag">Excel Analysis</span>
+                        <span class="tag">Data Visualization</span>
                     </div>
                 </div>
 
-                <!-- Skill 6 -->
+                <!-- Skill Domain 6 -->
                 <div class="skill-card">
-                    <div class="skill-top">
-                        <div class="skill-header">
-                            <img src="images/Powershell.png" alt="Powershell" class="skill-icon-img">
-                            <h4>Powershell</h4>
-                        </div>
-                        <div class="skill-subtitle">Introducing useful automation with scripting</div>
-                        <div class="skill-body">
-                            <p>I have experience using Microsoft Powershell to automate manual tasks.</p>
-                            <p>This has often been for data transfer or automating Windows operations to improve business processes.</p>
-                        </div>
+                    <div class="skill-header">
+                        <i class="fa-solid fa-file-lines"></i>
+                        <h4>Technical Communication</h4>
                     </div>
-                </div>
-
-                <!-- Skill 7 -->
-                <div class="skill-card">
-                    <div class="skill-top">
-                        <div class="skill-header">
-                            <img src="images/PowerBI.png" alt="PowerBI" class="skill-icon-img">
-                            <h4>Data Analysis</h4>
-                        </div>
-                        <div class="skill-subtitle">Creating reports and dashboards for insight</div>
-                        <div class="skill-body">
-                            <p>Power BI, SSRS, and Excel help me to produce meaningful data analysis, visualisations, and reports.</p>
-                            <p>This includes presenting trends and key points that are immediately useful to business stakeholders.</p>
-                        </div>
+                    <div class="skill-body">
+                        <p>Bridging the gaps between technical and business teams through clear documentation, stakeholder discussions, and action-based plans.</p>
                     </div>
-                </div>
-
-                <!-- Skill 8 -->
-                <div class="skill-card">
-                    <div class="skill-top">
-                        <div class="skill-header">
-                            <img src="images/DataModel.jpg" alt="DataModel" class="skill-icon-img">
-                            <h4>Data Modelling</h4>
-                        </div>
-                        <div class="skill-subtitle">Restructuring data for review</div>
-                        <div class="skill-body">
-                            <p>I have experience using the Kimball analytical method to transform data into semantic models driven by medallion architectures.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Skill 9 -->
-                <div class="skill-card">
-                    <div class="skill-top">
-                        <div class="skill-header">
-                            <img src="images/Document.png" alt="Document" class="skill-icon-img">
-                            <h4>Technical Writing</h4>
-                        </div>
-                        <div class="skill-subtitle">Providing well-written documentation</div>
-                        <div class="skill-body">
-                            <p>I take pride in writing documentation that presents concepts in an easy-to-understand way.</p> 
-                            <p>I aim to deliver key points quickly, but with comprehensive technical detail, in formats including Word and Markdown.</p>
-                        </div>
+                    <div class="skill-tags">
+                        <span class="tag">Stakeholder Engagement</span>
+                        <span class="tag">Markdown</span>
+                        <span class="tag">Confluence</span>
+                        <span class="tag">Technical Writing</span>
                     </div>
                 </div>
             </div>
@@ -743,7 +680,7 @@
             </div>
 
             <div class="experience-timeline">
-                <!-- Recent Experience Item 1 -->
+                <!-- Experience Item 1 -->
                 <div class="exp-card">
                     <div class="exp-header">
                         <div class="exp-title-area">
@@ -758,7 +695,7 @@
                         </div>
                     </div>
                     <div class="tech-stack-tag">
-                        <strong>Technologies:</strong> Azure resources, Synapse analytics, pySpark, Spark SQL, SQL Server, Azure Dev Ops, YAML, Kimball, data modelling, GitHub, Jira, Confluence
+                        <strong>Technologies:</strong> Azure Resources, Synapse Analytics, PySpark, Spark SQL, SQL Server, Azure DevOps, YAML, Kimball, Data Modelling, GitHub, Jira, Confluence
                     </div>
                     <ul class="exp-bullets">
                         <li>Collaborated within a 4-person engineering team to introduce a new semantic business data model (140+ entities), serving data analysts, scientists, and reporting users</li>
@@ -770,7 +707,7 @@
                     </ul>
                 </div>
 
-                <!-- Recent Experience Item 2 -->
+                <!-- Experience Item 2 -->
                 <div class="exp-card">
                     <div class="exp-header">
                         <div class="exp-title-area">
@@ -785,7 +722,7 @@
                         </div>
                     </div>
                     <div class="tech-stack-tag">
-                        <strong>Technologies:</strong> SQL Server 2008 R2 to 2019, PowerShell, SSIS, SSRS, Azure Dev Ops, Data Factory, Synapse Analytics, YAML, BICEP, Kimball, data modelling.
+                        <strong>Technologies:</strong> SQL Server (2008 R2–2019), PowerShell, SSIS, SSRS, Azure DevOps, Data Factory, Synapse Analytics, YAML, Bicep, Kimball
                     </div>
                     <ul class="exp-bullets">
                         <li>Analysis and delivery of changes to pension scheme data via complex T-SQL scripting and stored procedures</li>
@@ -798,7 +735,7 @@
                     </ul>
                 </div>
 
-                <!-- Recent Experience Item 3 -->
+                <!-- Experience Item 3 -->
                 <div class="exp-card">
                     <div class="exp-header">
                         <div class="exp-title-area">
@@ -813,7 +750,7 @@
                         </div>
                     </div>
                     <div class="tech-stack-tag">
-                        <strong>Technologies:</strong> SQL Server 2008 R2 to 2019, Oracle 12 to 19c, PowerShell, SSIS, SSRS, Git, RMAN.
+                        <strong>Technologies:</strong> SQL Server (2008 R2–2019), Oracle (12c–19c), PowerShell, SSIS, SSRS, Git, RMAN
                     </div>
                     <ul class="exp-bullets">
                         <li>DBA with responsibility for the Authority's SQL Server and Oracle database estate</li>
@@ -827,7 +764,7 @@
                     </ul>
                 </div>
 
-                <!-- Recent Experience Item 4 -->
+                <!-- Experience Item 4 -->
                 <div class="exp-card">
                     <div class="exp-header">
                         <div class="exp-title-area">
@@ -842,9 +779,9 @@
                         </div>
                     </div>
                     <div class="tech-stack-tag">
-                        <strong>Technologies:</strong> SQL Server (2008 R2 to 2017), thankQ CRM, SSIS, SSRS, VBA, Microsoft Office.
+                        <strong>Technologies:</strong> SQL Server (2008 R2–2017), thankQ CRM, SSIS, SSRS, VBA, Microsoft Office
                     </div>
-                    <ul class="exp-bullets">
+                     <ul class="exp-bullets">
                         <li>Automation of data pipelines (fundraising financials, stewardship communications, and event promotion)</li>
                         <li>Creation of bespoke data extracts for fundraisers and campaign organisers</li>
                         <li>Monitoring and resolving database performance issues, backup strategy and scheduled maintenance</li>
@@ -855,10 +792,10 @@
 
                 <!-- Sub Header: Previous Experience -->
                 <div class="sub-section-title">
-                    <i class="fa-solid fa-history" style="color: var(--accent-cyan);"></i> Previous Experience
+                    <i class="fa-solid fa-clock-rotate-left" style="color: var(--accent-cyan);"></i> Previous Experience
                 </div>
 
-                <!-- Previous Experience Item 1 -->
+                <!-- Previous Experience Items -->
                 <div class="exp-card">
                     <div class="exp-header">
                         <div class="exp-title-area">
@@ -873,11 +810,10 @@
                         </div>
                     </div>
                     <div class="tech-stack-tag">
-                        <strong>Technologies:</strong> SQL Server, T-SQL, SSIS, Microsoft Access with Visual Basic for Applications, SSRS, Civica UPM2 and W2.
+                        <strong>Technologies:</strong> SQL Server, T-SQL, SSIS, MS Access, VBA, SSRS, Civica UPM2 / W2
                     </div>
                 </div>
 
-                <!-- Previous Experience Item 2 -->
                 <div class="exp-card">
                     <div class="exp-header">
                         <div class="exp-title-area">
@@ -896,7 +832,6 @@
                     </div>
                 </div>
 
-                <!-- Previous Experience Item 3 -->
                 <div class="exp-card">
                     <div class="exp-header">
                         <div class="exp-title-area">
@@ -911,7 +846,7 @@
                         </div>
                     </div>
                     <div class="tech-stack-tag">
-                        <strong>Technologies:</strong> SQL Server, Microsoft Office with Visual Basic for Applications, Classic ASP, Street and Address Gazetteer Management to BS7666 standard.
+                        <strong>Technologies:</strong> SQL Server, MS Access, VBA, Classic ASP, BS7666 Gazetteer Management
                     </div>
                 </div>
 
@@ -922,6 +857,7 @@
         <section id="contact" class="section">
             <div class="contact-card">
                 <h4>Let's Connect</h4>
+                <p>Feel free to reach out for opportunities or technical collaborations.</p>
                 <a href="http://www.linkedin.com/in/thomasmcmastersql" class="btn-primary" target="_blank" rel="noopener">
                     <i class="fa-brands fa-linkedin"></i> LinkedIn Profile
                 </a>
